@@ -823,7 +823,7 @@ inline static bool checkArity(WrenVM* vm, Value value, int numArgs)
 
 // The main bytecode interpreter loop. This is where the magic happens. It is
 // also, as you can imagine, highly performance critical.
-static WrenInterpretResult runInterpreter(WrenVM* vm, ObjFiber* fiber)
+static WrenInterpretResult runInterpreter(WrenVM* vm, register ObjFiber* fiber)
 {
   // Remember the current fiber so we can find it if a GC happens.
   vm->fiber = fiber;
@@ -832,10 +832,10 @@ static WrenInterpretResult runInterpreter(WrenVM* vm, ObjFiber* fiber)
   // Hoist these into local variables. They are accessed frequently in the loop
   // but assigned less frequently. Keeping them in locals and updating them when
   // a call frame has been pushed or popped gives a large speed boost.
-  CallFrame* frame;
-  Value* stackStart;
-  uint8_t* ip;
-  ObjFn* fn;
+  register CallFrame* frame;
+  register Value* stackStart;
+  register uint8_t* ip;
+  register ObjFn* fn;
 
   // These macros are designed to only be invoked within this function.
   #define PUSH(value)  (*fiber->stackTop++ = value)
@@ -1899,13 +1899,13 @@ void wrenGetMapKeyValueAt(WrenVM* vm, int mapSlot,int index, int keySlot, int va
 
   if (itemIndex != usedIndex)
   {
-      SET_ERROR_AND_RETURN("Invalid map iterator.");
+      RETURN_ERROR("Invalid map iterator.");
   }
 
   MapEntry* entry = &map->entries[mapIndex];
   if (IS_UNDEFINED(entry->key))
   {
-    SET_ERROR_AND_RETURN("Invalid map iterator.");
+    RETURN_ERROR("Invalid map iterator.");
   }
 
   vm->apiStack[keySlot] = entry->key;
