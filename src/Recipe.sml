@@ -1,6 +1,6 @@
 Name: "wren"
 Language: "C++|0.4"
-Version: "1.0.1"
+Version: "1.0.2"
 EnableWarningsAsErrors: false
 PublicHeaders: [
 	"include/wren.h"
@@ -13,6 +13,7 @@ IncludePaths: [
 ]
 Defines: [
 	"DEBUG"
+	"WREN_NAN_TAGGING=1"
 	"WREN_OPT_META=0"
 	"WREN_OPT_RANDOM=0"
 ]
