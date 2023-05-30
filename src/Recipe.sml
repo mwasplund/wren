@@ -1,6 +1,6 @@
 Name: "wren"
 Language: "C++|0.4"
-Version: "1.0.2"
+Version: "1.0.3"
 EnableWarningsAsErrors: false
 PublicHeaders: [
 	"include/wren.h"
