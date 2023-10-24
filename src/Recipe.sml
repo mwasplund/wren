@@ -1,10 +1,16 @@
 Name: "wren"
 Language: "C++|0.4"
-Version: "1.0.3"
+Version: "1.0.4"
 EnableWarningsAsErrors: false
 PublicHeaders: [
-	"include/wren.h"
-	"include/wren.hpp"
+	{
+		Root: "include/"
+		Target: "wren/"
+		Files: [
+			"wren.h"
+			"wren.hpp"
+		]
+	}
 ]
 IncludePaths: [
 	"include"
